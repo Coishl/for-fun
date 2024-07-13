@@ -37,13 +37,15 @@ while True:
     # foodies yummers
     pg.draw.rect(screen, 'red', food)
     # draw snake
-    [pg.draw.rect(screen, 'green', segment) for segment in segments]
+    for segment in segments:
+          pg.draw.rect(screen, 'green', segment)
     # snakey move
     time_now = pg.time.get_ticks()
     if time_now - time > time_step:
           time = time_now
           snake.move_ip(snake_dir)
           segments.append(snake.copy())
-          segments = segments[+length:]
+          if len(segments) > length:
+                segments.pop(0)
     pg.display.flip()
     clock.tick(60)        
